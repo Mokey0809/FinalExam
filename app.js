@@ -1,9 +1,9 @@
 const express = require('express');
-const get = require('./function')
-const fs = require('fs')
-const hbs = require('hbs')
+const get = require('./function');
+const fs = require('fs');
+const hbs = require('hbs');
 
-var text = undefined
+var text = undefined;
 get.getCity('asdad').then((msg) =>{
     return get.getWeather(msg.city)
 }).then((msg) => {
@@ -12,11 +12,11 @@ get.getCity('asdad').then((msg) =>{
         country:'Canada',
         temp: msg.temp,
         wind: msg.des
-    }
+    };
     fs.writeFileSync(__dirname+'/public/weather.json', JSON.stringify(text))
 }).catch((error) => {
     text = 'Error!!!'
-})
+});
 
 var app = express();
 
@@ -24,14 +24,20 @@ hbs.registerPartials(__dirname + '/views/partials');
 
 hbs.registerHelper('getCurrentYear', () => {
     return new Date().getFullYear()
-})
+});
 
 hbs.registerHelper('getCurrentWeather', () => {
     return JSON.stringify(text)
-})
+});
 
-app.set('')
-app.use('/', express.static(__dirname + '/public'));
+app.set('');
+app.use('/', (request, response) => {
+    response.render('index.hbs', {
+        title: 'The Main Page',
+        year: new Date().getFullYear(),
+        message: 'Welcome To'
+    })
+});
 
 app.get('/main', (request, response) => {
     response.render('index.hbs', {
@@ -39,21 +45,21 @@ app.get('/main', (request, response) => {
         year: new Date().getFullYear(),
         message: 'Welcome To'
     })
-})
+});
 
 app.get('/info', (request, response) => {
     response.render('info.hbs', {
         title: 'The Info Page',
         message: 'Welcome To'
     })
-})
+});
 
 app.get('/weather', (request, response) => {
     response.render('weather.hbs', {
         title: 'The Weather Page',
-        message: 'Welcome To'
+        message: 'Welcome To yuyjfghdvsc'
     })
-})
+});
 
 app.get('*', (request, response) => {
   response.send('404 Page not Found');
