@@ -5,6 +5,10 @@ const bodyParser = require('body-parser');
 const port = process.env.PORT || 9000;
 var img = undefined;
 var text = undefined;
+var text12 = undefined;
+var text123 = undefined;
+var text124 = undefined;
+var text125 = undefined;
 
 var app = express();
 
@@ -23,54 +27,37 @@ hbs.registerHelper('getCard1', () => {
     return text
 });
 
-hbs.registerHelper('getImage1', () => {
-    getImage((text1) => {
-        text = text1
-    })
-})
-
 hbs.registerHelper('getCard2', () => {
     getDeck2((text2) => (
-        text = text2
+        text12 = text2
     ));
-    return text
+    return text12
 });
 
 hbs.registerHelper('getCard3', () => {
     getDeck3((text3) => (
-        text = text3
+        text123 = text3
     ));
-    return text
+    return text123
 });
 
 hbs.registerHelper('getCard4', () => {
     getDeck4((text4) => (
-        text = text4
+        text124 = text4
     ));
-    return text
+    return text124
 });
 
 hbs.registerHelper('getCard5', () => {
     getDeck5((text5) => (
-        text = text5
+        text125 = text5
     ));
-    return text
+    return text125
 });
 
 
 var getDeck = (callback) => {
     functions.getCards()
-    .then((msg) => (
-        callback(
-            msg.cards
-        )
-    )).catch((error) => {
-        callback('Error 404')
-    })
-}
-
-var getImage = (callback) => {
-    functions.getImage()
     .then((msg) => (
         callback(
             msg.cards
