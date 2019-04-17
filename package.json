@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/Mokey0809/FinalExam/issues"
   },
-  "homepage": "https://github.com/Mokey0809/FinalExam#readme"
+  "homepage": "https://github.com/Mokey0809/FinalExam#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "fs": "0.0.1-security",
+    "hbs": "^4.0.4",
+    "request": "^2.88.0"
+  }
 }
