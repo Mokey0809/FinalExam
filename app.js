@@ -2,6 +2,7 @@ const express = require('express');
 const get = require('./function');
 const fs = require('fs');
 const hbs = require('hbs');
+const port = process.env.PORT || 9000;
 
 var text = undefined;
 get.getCity('asdad').then((msg) =>{
@@ -65,6 +66,6 @@ app.get('*', (request, response) => {
   response.send('404 Page not Found');
 });
 
-app.listen(9000, () => {
-    console.log('Server is up on the port 9000')
+app.listen(port, () => {
+    console.log('Server is up on the port' + String(port))
 });
