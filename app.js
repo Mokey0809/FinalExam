@@ -5,7 +5,7 @@ const hbs = require('hbs');
 const port = process.env.PORT || 9000;
 
 var text = undefined;
-get.getCity('asdad').then((msg) =>{
+get.getCity('Canada').then((msg) =>{
     return get.getWeather(msg.city)
 }).then((msg) => {
     text = {
@@ -14,7 +14,7 @@ get.getCity('asdad').then((msg) =>{
         temp: msg.temp,
         wind: msg.des
     };
-    fs.writeFileSync(__dirname+'/public/weather.json', JSON.stringify(text))
+    fs.writeFileSync(__dirname+'/views/weather.json', JSON.stringify(text))
 }).catch((error) => {
     text = 'Error!!!'
 });
@@ -31,8 +31,8 @@ hbs.registerHelper('getCurrentWeather', () => {
     return JSON.stringify(text)
 });
 
-app.set('');
-app.use('/', (request, response) => {
+app.set('view engine', 'hbs');
+app.get('/', (request, response) => {
     response.render('index.hbs', {
         title: 'The Main Page',
         year: new Date().getFullYear(),
